@@ -3,8 +3,8 @@ export type Produto = {
     nome: string;
     descricaoCurta: string;
     descricaoLonga: string;
-    precoPorkg: number;
+    precoPorKg: number;
     ativo: string;
     imagem: string;
-    categoriaId: number[]
+    categoriaIds: number[]
 }

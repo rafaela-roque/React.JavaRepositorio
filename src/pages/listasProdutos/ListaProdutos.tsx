@@ -1,16 +1,20 @@
 import './ListaProdutos.css'
 
-import produto2 from '../../assets/img/produtos/le_grand_chocolat.png'
 
 import Card from '../../components/card/Card'
 import { useEffect, useState } from 'react'
 import type { Produto } from '../../types/Produto';
 import produtoService from '../../services/produtoService';
+import { useSearchParams } from 'react-router-dom';
 
 function ListaProdutos() {
   const [produtos,setProdutos]=useState<Produto[]>([]);
   const [erro,setErro] = useState('');
   const [carregando, setCarregando] = useState(true)
+  const [parametros] = useSearchParams();
+  const busca = (parametros.get('q') ?? '').toLocaleLowerCase('pt-BR');
+  const categoria = Number(parametros.get('categoria'))
+
 
   //Assim que a tela carregar assim que a pagina carregar ele vai puxar tudo oque tem nela
 
@@ -22,6 +26,10 @@ function ListaProdutos() {
        .finally(() => setCarregando(false))
   }, [])
 
+  const visiveis = produtos.filter(Produto =>
+    Produto.ativo && (!categoria || Produto.categoriaIds.includes(categoria)) &&
+    (!busca || `${Produto.nome} ${Produto.descricaoCurta}`.toLocaleLowerCase('pt-BR').includes(busca))
+  )
 
   return (
     <>
@@ -38,13 +46,13 @@ function ListaProdutos() {
            <p>Nenhum produto encontrado.</p>}
           <div className="prod_cards">
 
-       {produtos.map(produto => { return <Card
+            {visiveis.map(produto => { return <Card
              id={produto.id}
              key={produto.id}
              imgProdutos={`http://localhost:3000${produto.imagem}`}
              nome={produto.nome}
              descricao={produto.descricaoCurta}
-             valor={produto.precoPorkg}
+             valor={produto.precoPorKg}
              quantidadeAvaliacoes={10}
              nota={9.5}
 
