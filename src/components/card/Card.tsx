@@ -42,12 +42,12 @@ function Card({
         </p>
         <p className="card_rodape">
           <data value={valor}>R$ {valor} / kg</data>
-          <span className="card_av">
+          {/* <span className="card_av">
             <img src={userProdutos} />
             <data value={quantidadeAvaliacoes}>{quantidadeAvaliacoes}</data>
             <img src={starProdutos} />
             <data value={nota}>{nota}</data>
-          </span>
+          </span> */}
         </p>
       </article>
 

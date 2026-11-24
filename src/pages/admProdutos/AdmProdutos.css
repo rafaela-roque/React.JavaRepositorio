@@ -66,6 +66,7 @@ form label {
     font-size: 12px;
     font-weight: 700;
     margin-bottom: 5px;
+     
 }
 
 .inputs_form input[type=text],
@@ -138,6 +139,7 @@ form input[type=button] {
     padding: 16px 55px;
     cursor: pointer;
     letter-spacing: 3px;
+    border: none;
 }
 
 
